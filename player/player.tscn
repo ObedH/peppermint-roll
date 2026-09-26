@@ -50,28 +50,28 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_g1dw6")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_yw30f")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_qjkh3")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_g6k8r")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_boad6")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_rgyib")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_hg6s5")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_8t03j")
 }],
 "loop": 1,
@@ -80,6 +80,9 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7wlo"]
 radius = 8.0
 
 [node name="Player" type="CharacterBody2D" unique_id=615703194]
@@ -99,3 +102,12 @@ shape = SubResource("CircleShape2D_rkbax")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=460610346]
 zoom = Vector2(2, 2)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=482028643]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=407428630]
+shape = SubResource("CircleShape2D_e7wlo")
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
