@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://jphyg5xhx1y2"]
+
+[ext_resource type="Script" uid="uid://dub5dq1cqkqvs" path="res://enemies/gummy_kid/gummy_kid.gd" id="1_fodjj"]
+[ext_resource type="Texture2D" uid="uid://xc4wjpoo6x2p" path="res://enemies/gummy_kid/gummy_kid.png" id="2_1un3u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwg5r"]
+size = Vector2(12, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwg5r"]
+atlas = ExtResource("2_1un3u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh50e"]
+atlas = ExtResource("2_1un3u")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kwvl"]
+atlas = ExtResource("2_1un3u")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1un3u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwg5r")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh50e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kwvl")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7wlo"]
+size = Vector2(10, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1un3u"]
+size = Vector2(16, 8)
+
+[node name="GummyKid" type="CharacterBody2D" unique_id=683781778]
+collision_layer = 32
+platform_floor_layers = 1
+platform_wall_layers = 1
+script = ExtResource("1_fodjj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1204987188]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_lwg5r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1582390843]
+sprite_frames = SubResource("SpriteFrames_1un3u")
+animation = &"walk"
+frame_progress = 0.10573314
+offset = Vector2(0, -8)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1628349175]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1624020275]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_e7wlo")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=49816132]
+collision_layer = 256
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=810880592]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_1un3u")
+
+[node name="Floorcaster" type="RayCast2D" parent="." unique_id=1509061964]
+position = Vector2(-7, 0)
+target_position = Vector2(0, 4)
+hit_from_inside = true
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

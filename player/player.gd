@@ -9,13 +9,17 @@ const ACCELERATION = 500
 const MAX_HEALTH = 1
 
 var health: float
+var input_locked: bool = false
+var is_taking_damage: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_timer: Timer = $DeathTimer
 
 
 func _ready() -> void:
 	health = MAX_HEALTH
 	GameManager.change_health(1)
+	GameManager.player = self
 
 
 func reset() -> void:
@@ -27,13 +31,13 @@ func _physics_process(delta: float) -> void:
 		velocity += Vector2.DOWN * GRAVITY * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and not input_locked:
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
+	if direction and not input_locked:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
@@ -45,14 +49,18 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x < 0.0001:
 		sprite.flip_h = true
 	
-	if abs(velocity.x) < 0.0001:
-		sprite.play("default")
-	else:
-		sprite.play("roll")
+	if not is_taking_damage:
+		if abs(velocity.x) < 0.0001:
+			sprite.play("default")
+		else:
+			sprite.play("roll")
 
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
 	health -= 0.1
+	sprite.play("damage")
+	is_taking_damage = true
+	death_timer.start()
 	if body is TileMapLayer:
 		GameManager.change_health(health)
 		GameManager.reload_level()
@@ -61,3 +69,8 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		velocity.y = JUMP_VELOCITY
 	if health <= 0:
 		get_tree().change_scene_to_file.call_deferred("res://scenes/gameover.tscn")
+
+
+func _on_death_timer_timeout() -> void:
+	is_taking_damage = false
+	sprite.play("default")

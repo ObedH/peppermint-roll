@@ -40,6 +40,8 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 2d_physics/layer_6="enemy"
 2d_physics/layer_7="spike"
 2d_physics/layer_8="checkpoint"
+2d_physics/layer_9="enemy_hurtbox"
+2d_physics/layer_10="player_hitbox"
 
 [physics]
 

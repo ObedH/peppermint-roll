@@ -7,13 +7,14 @@ var last_spawn_pos: Vector2
 
 func _ready() -> void:
 	GameManager.checkpoint_entered.connect(_on_checkpoint_entered)
-	GameManager.level_reloaded.connect(_on_level_reloaded)
+
+
+func reload_level() -> void:
+	var tw: Tween = create_tween()
+	tw.tween_property(player, "global_position", last_spawn_pos, 0.002 * last_spawn_pos.distance_to(player.global_position))
+	player.reset()
+	await tw.finished
 
 
 func _on_checkpoint_entered(pos: Vector2) -> void:
 	last_spawn_pos = pos
-
-
-func _on_level_reloaded() -> void:
-	player.global_position = last_spawn_pos
-	player.reset()

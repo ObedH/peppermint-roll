@@ -3,6 +3,14 @@
 [ext_resource type="Script" uid="uid://bm26s23ulkxq6" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://xbw1uyrn5211" path="res://player/player.png" id="2_rkbax"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebec5"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(144, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkbax"]
 atlas = ExtResource("2_rkbax")
 region = Rect2(0, 0, 16, 16)
@@ -41,6 +49,17 @@ region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e7wlo"]
 animations = [{
+"frames": [{
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_2ieo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebec5")
+}],
+"loop": 1,
+"name": &"damage",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rkbax")
@@ -85,6 +104,9 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7wlo"]
 radius = 8.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx6a2"]
+size = Vector2(20, 7)
+
 [node name="Player" type="CharacterBody2D" unique_id=615703194]
 collision_layer = 2
 floor_stop_on_slope = false
@@ -96,6 +118,7 @@ script = ExtResource("1_oul6g")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=930723859]
 sprite_frames = SubResource("SpriteFrames_e7wlo")
 animation = &"roll"
+frame_progress = 0.16456898
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=969920690]
 shape = SubResource("CircleShape2D_rkbax")
@@ -105,9 +128,23 @@ zoom = Vector2(2, 2)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=482028643]
 collision_layer = 16
-collision_mask = 72
+collision_mask = 104
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=407428630]
 shape = SubResource("CircleShape2D_e7wlo")
 
+[node name="HitBox" type="Area2D" parent="." unique_id=551375964]
+collision_layer = 512
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1575387059]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_vx6a2")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=667253342]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
