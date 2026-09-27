@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="Peppermint Roll"
-run/main_scene="uid://dtnrxqa25k647"
+run/main_scene="uid://dcrkwvinm0hku"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://bh3lme8kpvi"
+
 [display]
 
+window/size/viewport_width=640
+window/size/viewport_height=360
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -32,6 +38,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 2d_physics/layer_4="enemy_hitbox"
 2d_physics/layer_5="player_hurtbox"
 2d_physics/layer_6="enemy"
+2d_physics/layer_7="spike"
 
 [physics]
 

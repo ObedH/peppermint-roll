@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://buexjohj8yi7c"]
+
+[ext_resource type="Texture2D" uid="uid://88620l50sqid" path="res://scenes/under.png" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://bh2jfhlfehtqf" path="res://scenes/over.png" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://bguy102nyqs4y" path="res://scenes/progress.png" id="3_6fi6k"]
+[ext_resource type="Script" uid="uid://bxix0rgdloo75" path="res://scenes/health_bar.gd" id="4_6fi6k"]
+
+[node name="Control" type="Control" unique_id=1845885631]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=401140753]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 48.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("1_ahhtf")
+texture_over = ExtResource("2_5ysmq")
+texture_progress = ExtResource("3_6fi6k")
+script = ExtResource("4_6fi6k")

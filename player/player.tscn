@@ -105,7 +105,7 @@ zoom = Vector2(2, 2)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=482028643]
 collision_layer = 16
-collision_mask = 8
+collision_mask = 72
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=407428630]
 shape = SubResource("CircleShape2D_e7wlo")

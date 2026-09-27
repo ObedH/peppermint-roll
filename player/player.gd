@@ -7,7 +7,7 @@ const JUMP_VELOCITY = -500.0
 const GRAVITY = 2000
 const FRICTION = 800
 const ACCELERATION = 500
-const MAX_HEALTH = 100
+const MAX_HEALTH = 1
 
 var health: float
 
@@ -16,6 +16,7 @@ var health: float
 
 func _ready() -> void:
 	health = MAX_HEALTH
+	GameManager.change_health(1)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -48,6 +49,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
-	health -= 10
+	health -= 0.1
+	velocity.y = JUMP_VELOCITY
+	GameManager.change_health(health)
 	if health < 0:
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://scenes/gameover.tscn")

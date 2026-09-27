@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dcrkwvinm0hku"]
+
+[ext_resource type="PackedScene" uid="uid://dtnrxqa25k647" path="res://levels/level_base.tscn" id="1_8r3iy"]
+[ext_resource type="PackedScene" uid="uid://buexjohj8yi7c" path="res://scenes/hud.tscn" id="2_bofkp"]
+
+[node name="Play" type="Node2D" unique_id=872307413]
+
+[node name="LevelBase" parent="." unique_id=160127633 instance=ExtResource("1_8r3iy")]
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=927080315]
+layer = 900
+
+[node name="Control" parent="UILayer" unique_id=1845885631 instance=ExtResource("2_bofkp")]
