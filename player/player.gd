@@ -57,11 +57,19 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
-	health -= 0.1
+	take_hit(body is TileMapLayer)
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	take_hit(false)
+
+
+func take_hit(is_tilemaplayer: bool) -> void:
+	health -= 0.3
 	sprite.play("damage")
 	is_taking_damage = true
 	death_timer.start()
-	if body is TileMapLayer:
+	if is_tilemaplayer:
 		GameManager.change_health(health)
 		GameManager.reload_level()
 	else:
