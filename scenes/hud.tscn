@@ -1,23 +1,28 @@
 [gd_scene format=3 uid="uid://buexjohj8yi7c"]
 
 [ext_resource type="Texture2D" uid="uid://88620l50sqid" path="res://scenes/under.png" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://x5hqw0qme5p5" path="res://scenes/hud.gd" id="1_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://bh2jfhlfehtqf" path="res://scenes/over.png" id="2_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://bguy102nyqs4y" path="res://scenes/progress.png" id="3_6fi6k"]
 [ext_resource type="Script" uid="uid://bxix0rgdloo75" path="res://scenes/health_bar.gd" id="4_6fi6k"]
 
-[node name="Control" type="Control" unique_id=1845885631]
+[sub_resource type="LabelSettings" id="LabelSettings_fgvuj"]
+font_size = 24
+
+[node name="HUD" type="Control" unique_id=1845885631]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_uo2fv")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=401140753]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 16.0
 offset_top = 16.0
-offset_right = 512.0
+offset_right = 400.0
 offset_bottom = 48.0
 value = 100.0
 nine_patch_stretch = true
@@ -29,3 +34,13 @@ texture_under = ExtResource("1_ahhtf")
 texture_over = ExtResource("2_5ysmq")
 texture_progress = ExtResource("3_6fi6k")
 script = ExtResource("4_6fi6k")
+
+[node name="Timre" type="Label" parent="." unique_id=503300136]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 16.0
+offset_right = 640.0
+offset_bottom = 50.0
+text = "Time:"
+label_settings = SubResource("LabelSettings_fgvuj")
+vertical_alignment = 1

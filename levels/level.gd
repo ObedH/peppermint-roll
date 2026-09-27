@@ -23,4 +23,4 @@ func _on_checkpoint_entered(pos: Vector2) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("hello!")
 	if body is Player:
-		get_tree().change_scene_to_file("res://scenes/you_win.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://scenes/you_win.tscn")

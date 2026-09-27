@@ -13,7 +13,7 @@ script = ExtResource("1_hsi3f")
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=927080315]
 layer = 900
 
-[node name="Control" parent="UILayer" unique_id=1845885631 instance=ExtResource("2_bofkp")]
+[node name="HUD" parent="UILayer" unique_id=1845885631 instance=ExtResource("2_bofkp")]
 
 [node name="FadeEffect" type="CanvasLayer" parent="." unique_id=1467892177]
 script = ExtResource("3_bq38n")

@@ -5,6 +5,16 @@ signal checkpoint_entered(pos: Vector2)
 signal level_reloaded()
 
 var player: Player
+var time: float
+var best: float = 999999999999999
+
+
+func _ready() -> void:
+	var sf: SaveFile = ResourceLoader.load("user://highscore.tres")
+	if not sf:
+		GameManager.best = 999999999999999
+	else:
+		GameManager.best = sf.best_time
 
 
 func change_health(new_val: float) -> void:
@@ -13,6 +23,7 @@ func change_health(new_val: float) -> void:
 
 func enter_checkpoint(pos: Vector2) -> void:
 	checkpoint_entered.emit(pos)
+
 
 func reload_level() -> void:
 	level_reloaded.emit()
