@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ybkbd54aws13"]
+
+[ext_resource type="Script" uid="uid://doe7n0054kdcv" path="res://scenes/you_win.gd" id="1_iblaa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7wlo"]
+font_size = 64
+
+[node name="YouWin" type="Control" unique_id=1853744018]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iblaa")
+
+[node name="Label" type="Label" parent="." unique_id=1135730299]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 463.0
+offset_bottom = 216.0
+text = "You Win!"
+label_settings = SubResource("LabelSettings_e7wlo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=286985601]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 224.0
+offset_right = 370.0
+offset_bottom = 255.0
+text = "Back to Menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

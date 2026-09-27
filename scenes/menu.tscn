@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://drhtna8jf3ks5"]
+
+[ext_resource type="Script" uid="uid://gj45ruxc1qgs" path="res://scenes/menu.gd" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://xbw1uyrn5211" path="res://player/player.png" id="1_yqeox"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7wlo"]
+font_size = 64
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjb58"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_con2f"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhnvy"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ytvr"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3eks"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v86rl"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13sgg"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6lef"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70i5f"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7wlo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjb58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_con2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhnvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ytvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3eks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v86rl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13sgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6lef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70i5f")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_mj5lg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ufwb2"]
+resource_name = "new_animation"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-48, -2, 0, 2, 0, 687.5, -2, 0, 2, 0, -48, -2, 0, 0, 0),
+"times": PackedFloat32Array(0, 4, 8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cdou"]
+_data = {
+&"RESET": SubResource("Animation_mj5lg"),
+&"new_animation": SubResource("Animation_ufwb2")
+}
+
+[node name="Menu" type="Control" unique_id=696286422]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjb58")
+
+[node name="Button" type="Button" parent="." unique_id=280635315]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 208.0
+offset_right = 384.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 32
+text = "Play"
+
+[node name="Label" type="Label" parent="." unique_id=1924879625]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 96.0
+offset_right = 595.0
+offset_bottom = 184.0
+text = "Peppermint Roll!"
+label_settings = SubResource("LabelSettings_e7wlo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=331384048]
+position = Vector2(0, 320)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_e7wlo")
+frame_progress = 0.46037728
+speed_scale = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=142816207]
+libraries/ = SubResource("AnimationLibrary_6cdou")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dub5dq1cqkqvs" path="res://enemies/gummy_kid/gummy_kid.gd" id="1_fodjj"]
 [ext_resource type="Texture2D" uid="uid://xc4wjpoo6x2p" path="res://enemies/gummy_kid/gummy_kid.png" id="2_1un3u"]
+[ext_resource type="AudioStream" uid="uid://dsqjlh72st6ei" path="res://enemies/gummy_kid/splat_sound_effect.mp3" id="3_lwg5r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwg5r"]
 size = Vector2(12, 16)
@@ -46,6 +47,10 @@ size = Vector2(10, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1un3u"]
 size = Vector2(16, 7)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e7wlo"]
+streams_count = 1
+stream_0/stream = ExtResource("3_lwg5r")
+
 [node name="GummyKid" type="CharacterBody2D" unique_id=683781778]
 collision_layer = 32
 platform_floor_layers = 1
@@ -87,5 +92,8 @@ hit_from_inside = true
 position = Vector2(-9, -8)
 target_position = Vector2(-3, 0)
 hit_from_inside = true
+
+[node name="SplatSound" type="AudioStreamPlayer" parent="." unique_id=2118334905]
+stream = SubResource("AudioStreamRandomizer_e7wlo")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

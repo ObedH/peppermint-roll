@@ -18,3 +18,9 @@ func reload_level() -> void:
 
 func _on_checkpoint_entered(pos: Vector2) -> void:
 	last_spawn_pos = pos
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print("hello!")
+	if body is Player:
+		get_tree().change_scene_to_file("res://scenes/you_win.tscn")

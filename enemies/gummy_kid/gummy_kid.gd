@@ -10,6 +10,7 @@ var movement_direction: float = -1
 @onready var floorcaster: RayCast2D = $Floorcaster
 @onready var wallcaster: RayCast2D = $WallCaster
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var splat_sound: AudioStreamPlayer = $SplatSound
 
 
 func _ready() -> void:
@@ -39,4 +40,7 @@ func _physics_process(delta: float) -> void:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	GameManager.hitstop()
 	GameManager.player.velocity.y = JUMP_VELOCITY
+	splat_sound.reparent(get_tree().current_scene)
+	splat_sound.finished.connect(splat_sound.queue_free)
+	splat_sound.play()
 	queue_free()
